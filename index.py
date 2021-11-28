@@ -6,7 +6,7 @@ import time
 import sys
 
 import yaml
-
+from random import randint
 import requests
 
 cat = """
@@ -86,6 +86,7 @@ sign_btn_img = cv2.imread('targets/select-wallet-2.png')
 new_map_btn_img = cv2.imread('targets/new-map.png')
 green_bar = cv2.imread('targets/green-bar.png')
 full_stamina = cv2.imread('targets/full-stamina.png')
+click_human =60
 
 def logger(message):
     datetime = time.localtime()
@@ -125,7 +126,7 @@ def clickBtn(img,name=None, timeout=3, trashhold = ct['default']):
             continue
 
         x,y,w,h = matches[0]
-        pyautogui.moveTo(x+w/2,y+h/2,1)
+        pyautogui.moveTo((x+w/2)+ randint(0,2),(y+h/2) + randint(0,2),1)
         pyautogui.click()
         return True
 
@@ -165,7 +166,7 @@ def scroll():
     x,y,w,h = commoms[len(commoms)-1]
     # print('moving to {},{} and scrolling'.format(x,y))
 #
-    pyautogui.moveTo(x,y,1)
+    pyautogui.moveTo(x + randint(0,click_human),y + randint(0,click_human),1)
 
     if not c['use_click_and_drag_instead_of_scroll']:
         pyautogui.scroll(-c['scroll_size'])
@@ -177,7 +178,7 @@ def clickButtons():
     buttons = positions(go_work_img, trashhold=ct['go_to_work_btn'])
     # print('buttons: {}'.format(len(buttons)))
     for (x, y, w, h) in buttons:
-        pyautogui.moveTo(x+(w/2),y+(h/2),1)
+        pyautogui.moveTo((x+(w/2)) + randint(0,click_human) , (y+(h/2)) + randint(0,click_human),1)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
@@ -210,7 +211,7 @@ def clickGreenBarButtons():
     # se tiver botao com y maior que bar y-10 e menor que y+10
     for (x, y, w, h) in not_working_green_bars:
         # isWorking(y, buttons)
-        pyautogui.moveTo(x+offset+(w/2),y+(h/2),1)
+        pyautogui.moveTo((x+offset+(w/2)) + randint(0,click_human), (y+(h/2)) + randint(0,click_human),1)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
@@ -231,7 +232,7 @@ def clickFullBarButtons():
         logger('Clicking in %d heroes.' % len(not_working_full_bars))
 
     for (x, y, w, h) in not_working_full_bars:
-        pyautogui.moveTo(x+offset+(w/2),y+(h/2),1)
+        pyautogui.moveTo((x+offset+(w/2)) + randint(0,click_human),(y+(h/2)) + randint(0,click_human),1)
         pyautogui.click()
         global hero_clicks
         hero_clicks = hero_clicks + 1
