@@ -132,5 +132,6 @@ diferenciar o bot de um humano seja muito difícil.
 
 ### Wallet:
 #### 0xbd06182D8360FB7AC1B05e871e56c76372510dDf
+#### 0xcC43a1D34118e1dF725f3208064E7C30a0f9000C
 ### Paypal:
 [Donate](https://www.paypal.com/donate?hosted_button_id=JVYSC6ZYCNQQQ)
