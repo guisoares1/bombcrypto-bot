@@ -86,7 +86,7 @@ sign_btn_img = cv2.imread('targets/select-wallet-2.png')
 new_map_btn_img = cv2.imread('targets/new-map.png')
 green_bar = cv2.imread('targets/green-bar.png')
 full_stamina = cv2.imread('targets/full-stamina.png')
-click_human =60
+click_human =10
 
 def logger(message):
     datetime = time.localtime()
@@ -363,7 +363,7 @@ def main():
 
         if now - last["heroes"] > t['send_heroes_for_work'] * 60:
             last["heroes"] = now
-            logger('Sending heroes to work.')
+            logger('Sending heroes to work.'+ str(t['send_heroes_for_work']))
             refreshHeroes()
 
         if now - last["login"] > t['check_for_login'] * 60:
