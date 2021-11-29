@@ -321,7 +321,7 @@ def login():
 
 def refreshHeroes():
     goToHeroes()
-
+    time.sleep(25)
     if c['select_heroes_mode'] == "full":
         logger("Sending heroes with full stamina bar to work!")
     elif c['select_heroes_mode'] == "green":
