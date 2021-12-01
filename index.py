@@ -9,32 +9,19 @@ import yaml
 from random import randint
 import requests
 
-cat = """
-                                                _
-                                                \`*-.
-                                                 )  _`-.
-                                                .  : `. .
-                                                : _   '  \\
-                                                ; *` _.   `*-._
-                                                `-.-'          `-.
-                                                  ;       `       `.
-                                                  :.       .        \\
-                                                  . \  .   :   .-'   .
-                                                  '  `+.;  ;  '      :
-                                                  :  '  |    ;       ;-.
-                                                  ; '   : :`-:     _.`* ;
-                                               .*' /  .*' ; .*`- +'  `*'
-                                               `*-*   `*-*  `*-*'
-====== Please, consider buying me an coffe :) =========================
-==== 0xbd06182D8360FB7AC1B05e871e56c76372510dDf =======================
-==== https://www.paypal.com/donate?hosted_button_id=JVYSC6ZYCNQQQ =====
+nelcir = """
+ _______         .__         .__                                        
+ \      \   ____ |  |   ____ |__|______                                  
+ /   |   \_/ __ \|  | _/ ___\|  \_  __ \                                
+/    |    \  ___/|  |_\  \___|  ||  | \/                               
+\____|__  /\___  >____/\___  >__||__|                                   
+        \/     \/          \/                                              
 =======================================================================
 
 >>---> Press ctrl + c to kill the bot.
 >>---> Some configs can be fount in the config.yaml file.
 """
 
-print(cat)
 
 headers = {
     'authority': 'plausible.io',
@@ -86,7 +73,7 @@ sign_btn_img = cv2.imread('targets/select-wallet-2.png')
 new_map_btn_img = cv2.imread('targets/new-map.png')
 green_bar = cv2.imread('targets/green-bar.png')
 full_stamina = cv2.imread('targets/full-stamina.png')
-click_human =10
+click_human =5
 
 def logger(message):
     datetime = time.localtime()
@@ -274,8 +261,9 @@ def login():
     if clickBtn(connect_wallet_btn_img, name='connectWalletBtn', timeout = 10):
         login_attempts = login_attempts + 1
         logger('Connect wallet button detected, logging in!')
+        
         #TODO mto ele da erro e poco o botao n abre
-        # time.sleep(10)
+        time.sleep(2)
 
     if clickBtn(sign_btn_img, name='sign button', timeout=8):
         # sometimes the sign popup appears imediately
@@ -348,6 +336,9 @@ def refreshHeroes():
     goToGame()
 
 def main():
+   # os.system("pause")
+   # press('enter')
+    print(nelcir)
     time.sleep(5)
     t = c['time_intervals']
 
@@ -361,16 +352,16 @@ def main():
     while True:
         now = time.time()
 
-        if now - last["heroes"] > t['send_heroes_for_work'] * 60:
-            last["heroes"] = now
-            logger('Sending heroes to work.'+ str(t['send_heroes_for_work']))
-            refreshHeroes()
-
         if now - last["login"] > t['check_for_login'] * 60:
             logger("Checking if game has disconnected.")
             sys.stdout.flush()
             last["login"] = now
             login()
+        
+        if now - last["heroes"] > t['send_heroes_for_work'] * 60:
+            last["heroes"] = now
+            logger('Sending heroes to work.'+ str(t['send_heroes_for_work']))
+            refreshHeroes()
 
         if now - last["new_map"] > t['check_for_new_map_button']:
             last["new_map"] = now
@@ -387,8 +378,11 @@ def main():
         #clickBtn(teasureHunt)
         logger(".")
         sys.stdout.flush()
-
+        
         time.sleep(1)
+
+
+
 
 
 main()
